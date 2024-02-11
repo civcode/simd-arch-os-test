@@ -87,47 +87,26 @@ int main() {
     std::cout << "Compiled for ARM64 (64 bit)." << std::endl;
 #endif
 
+#if ARCH_IS_X86 && OS_IS_LINUX
+    if (isSSE42Supported()) {
+        std::cout << "SSE4.2 is supported." << std::endl;   
+    } else {
+        std::cout << "SSE4.2 is not supported." << std::endl;
+    }
+    if (isAVX2Supported()) {
+        std::cout << "AVX2 is supported." << std::endl;   
+    } else {
+        std::cout << "AVX2 is not supported." << std::endl;
+    }
+#endif
 
-// #if OS_IS_WINDOWS
-//     std::cout << "Compiled for Windows." << std::endl;  
-//     #if ARCH_IS_X86 && !ARCH_IS_64_BIT
-//     std::cout << "Compiled for x86 (32 bit)." << std::endl;
-//     #elif ARCH_IS_X86 && ARCH_IS_64_BIT
-//     std::cout << "Compiled for x86_64 (64 bit)." << std::endl;
-//     #elif ARCH_IS_ARM
-//     std::cout << "Compiled for ARM." << std::endl;
-//     #endif
-
-
-
-
-//     #if defined(__arm__)
-//     std::cout << "Compiled for ARM (32-bit)." << std::endl;
-//     std::cout << "NEON support is generally assumed for ARMv7 and later." << std::endl;
-//     #elif defined(__aarch64__)
-//     std::cout << "Compiled for ARM64 (AArch64)." << std::endl;
-//     std::cout << "NEON support is generally assumed for ARM64." << std::endl;
-//     #elif defined(__i386__) || defined(__x86_64__)
-//     #if defined(__x86_64__)
-//     std::cout << "Compiled for x86_64 (64-bit)." << std::endl;
-//     #else
-//     std::cout << "Compiled for x86 (32-bit)." << std::endl;
-//     #endif
-//     // Check for SSE4.2 and AVX2 support
-//     if (isSSE42Supported()) {
-//         std::cout << "SSE4.2 is supported." << std::endl;
-//     } else {
-//         std::cout << "SSE4.2 is not supported." << std::endl;
-//     }
-
-//     if (isAVX2Supported()) {
-//         std::cout << "AVX2 is supported." << std::endl;
-//     } else {
-//         std::cout << "AVX2 is not supported." << std::endl;
-//     }
-//     #else
-//     std::cout << "Architecture not identified." << std::endl;
-//     #endif
+#if ARCH_IS_ARM && OS_IS_LINUX
+    if (isNEONSupported()) {
+        std::cout << "NEON is supported." << std::endl;   
+    } else {
+        std::cout << "NEON is not supported." << std::endl;
+    }
+#endif
 
     return 0;
 }
